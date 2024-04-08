@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken')
 
 
 //REGISTER
-router.post("register",async(req,res)=>{
+router.post("/register",async(req,res)=>{
     try{
         const {username,email,password}=req.body
         const salt=await bcrypt.genSalt(10)
@@ -24,7 +24,7 @@ router.post("register",async(req,res)=>{
 
 
 //LOGIN
-router.post("login",async (req,res)=>{
+router.post("/login",async (req,res)=>{
     try{
         const user=await User.findOne({email:req.body.email})
        
@@ -49,7 +49,7 @@ router.post("login",async (req,res)=>{
 
 
 //LOGOUT
-router.get("logout",async (req,res)=>{
+router.get("/logout",async (req,res)=>{
     try{
         res.clearCookie("token",{sameSite:"none",secure:true}).status(200).send("User logged out successfully!")
 
@@ -60,7 +60,7 @@ router.get("logout",async (req,res)=>{
 })
 
 //REFETCH USER
-router.get("refetch", (req,res)=>{
+router.get("/refetch", (req,res)=>{
     const token=req.cookies.token
     jwt.verify(token,process.env.SECRET,{},async (err,data)=>{
         if(err){

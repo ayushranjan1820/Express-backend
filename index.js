@@ -31,10 +31,10 @@ app.use(express.json())
 app.use("/images",express.static(path.join(__dirname,"/images")))
 app.use(cors({origin:"https://6613afdf4a79d171bf487a29--wonderful-lily-9f169f.netlify.app",credentials:true}))
 app.use(cookieParser())
-app.use("api/auth",authRoute)
-app.use("api/users",userRoute)
-app.use("api/posts",postRoute)
-app.use("api/comments",commentRoute)
+app.use("/api/auth",authRoute)
+app.use("/api/users",userRoute)
+app.use("/api/posts",postRoute)
+app.use("/api/comments",commentRoute)
 
 //image upload
 const storage=multer.diskStorage({
@@ -48,7 +48,7 @@ const storage=multer.diskStorage({
 })
 
 const upload=multer({storage:storage})
-app.post("api/upload",upload.single("file"),(req,res)=>{
+app.post("/api/upload",upload.single("file"),(req,res)=>{
     console.log(req.body)
     res.status(200).json("Image has been uploaded successfully!")
 })

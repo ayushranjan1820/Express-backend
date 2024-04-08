@@ -7,7 +7,7 @@ const Comment=require('../models/Comment')
 const verifyToken = require('../verifyToken')
 
 //CREATE
-router.post("create",verifyToken,async (req,res)=>{
+router.post("/create",verifyToken,async (req,res)=>{
     try{
         const newComment=new Comment(req.body)
         const savedComment=await newComment.save()
@@ -50,7 +50,7 @@ router.delete("/:id",verifyToken,async (req,res)=>{
 
 
 //GET POST COMMENTS
-router.get("post/:postId",async (req,res)=>{
+router.get("/post/:postId",async (req,res)=>{
     try{
         const comments=await Comment.find({postId:req.params.postId})
         res.status(200).json(comments)
